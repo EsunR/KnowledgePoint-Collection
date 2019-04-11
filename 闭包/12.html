@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div id="btnBox">
+    <button id="0">0</button>
+    <button id="1">1</button>
+    <button id="2">2</button>
+    <script>
+      var btnBox = document.getElementById('btnBox');
+      var inputs = btnBox.getElementsByTagName('button');
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].onclick = (function (i) {
+          return (function () {
+            alert(i);
+          })
+        })(i)
+      }
+    </script>
+  </div>
+</body>
+
+
+</html>

@@ -1,0 +1,689 @@
+> 视频地址：https://www.bilibili.com/video/av24383268/?p=13
+- [02. JS中的严格模式和ARG映射机制](#02-js%E4%B8%AD%E7%9A%84%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E5%92%8Carg%E6%98%A0%E5%B0%84%E6%9C%BA%E5%88%B6)
+  - [EXP1](#exp1)
+  - [EXP2](#exp2)
+    - [映射机制](#%E6%98%A0%E5%B0%84%E6%9C%BA%E5%88%B6)
+    - [严格模式](#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F)
+- [03. 逻辑或和逻辑与](#03-%E9%80%BB%E8%BE%91%E6%88%96%E5%92%8C%E9%80%BB%E8%BE%91%E4%B8%8E)
+  - [EXP1](#exp1-1)
+    - [逻辑或和逻辑与](#%E9%80%BB%E8%BE%91%E6%88%96%E5%92%8C%E9%80%BB%E8%BE%91%E4%B8%8E)
+    - [逻辑与和逻辑或的混合应用模式](#%E9%80%BB%E8%BE%91%E4%B8%8E%E5%92%8C%E9%80%BB%E8%BE%91%E6%88%96%E7%9A%84%E6%B7%B7%E5%90%88%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F)
+- [04. 有关堆栈内存释放](#04-%E6%9C%89%E5%85%B3%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E9%87%8A%E6%94%BE)
+- [05. 练习题讲解](#05-%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AE%B2%E8%A7%A3)
+  - [EXP1](#exp1-2)
+  - [EXP2](#exp2-1)
+- [06. 堆栈内存和this混合应用](#06-%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E5%92%8Cthis%E6%B7%B7%E5%90%88%E5%BA%94%E7%94%A8)
+    - [EXP1](#exp1-3)
+  - [EXP2](#exp2-2)
+- [07. 构造函数和原型链的运行机制](#07-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6)
+  - [EXP1](#exp1-4)
+    - [基本数据类型和引用数据类型](#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
+    - [函数类型](#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B)
+    - [对象类型](#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B)
+    - [prototype](#prototype)
+  - [EXP2](#exp2-3)
+- [08. 基于闭包解决循环绑定](#08-%E5%9F%BA%E4%BA%8E%E9%97%AD%E5%8C%85%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E7%BB%91%E5%AE%9A)
+  - [EXP1](#exp1-5)
+    - [事件绑定为什么会导致出错](#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%87%BA%E9%94%99)
+    - [解决方案](#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88)
+    - [闭包解决](#%E9%97%AD%E5%8C%85%E8%A7%A3%E5%86%B3)
+- [09. 关于this的两道题](#09-%E5%85%B3%E4%BA%8Ethis%E7%9A%84%E4%B8%A4%E9%81%93%E9%A2%98)
+  - [EXP1](#exp1-6)
+    - [this指向判断](#this%E6%8C%87%E5%90%91%E5%88%A4%E6%96%AD)
+  - [EXP2](#exp2-4)
+- [10. 关于原型重定向问题](#10-%E5%85%B3%E4%BA%8E%E5%8E%9F%E5%9E%8B%E9%87%8D%E5%AE%9A%E5%90%91%E9%97%AE%E9%A2%98)
+  - [EXP1](#exp1-7)
+    - [原型重定向导致的问题](#%E5%8E%9F%E5%9E%8B%E9%87%8D%E5%AE%9A%E5%90%91%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98)
+- [11. 关于原型重定向综合性练习](#11-%E5%85%B3%E4%BA%8E%E5%8E%9F%E5%9E%8B%E9%87%8D%E5%AE%9A%E5%90%91%E7%BB%BC%E5%90%88%E6%80%A7%E7%BB%83%E4%B9%A0)
+  - [EXP1](#exp1-8)
+- [12. 数组去重引发的基于内置类原型拓展方法，并且实现链式调用](#12-%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E5%BC%95%E5%8F%91%E7%9A%84%E5%9F%BA%E4%BA%8E%E5%86%85%E7%BD%AE%E7%B1%BB%E5%8E%9F%E5%9E%8B%E6%8B%93%E5%B1%95%E6%96%B9%E6%B3%95%E5%B9%B6%E4%B8%94%E5%AE%9E%E7%8E%B0%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8)
+  - [EXP1:](#exp1)
+- [13. 闭包和团队协作开发](#13-%E9%97%AD%E5%8C%85%E5%92%8C%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91)
+  - [EXP1](#exp1-9)
+  - [EXP2](#exp2-5)
+  - [EXP3](#exp3)
+
+
+# 02. JS中的严格模式和ARG映射机制
+
+## EXP1
+```js
+if(!("a" in window)){ // !true
+    var a = 1;
+}
+console.log(a);
+```
+
+> 输出：undefined
+
+不管条件是否成立都要进行变量提升，在全局作用域下声明的变量，也相当于给window设置了一个对象的属性，而且两者之间建立了映射机制 <=> `window.a = undefined`
+
+`in`：检测某一个属性是否隶属于这个对象，不管是私有属性还是公有属性，只要有这个属性结果就是true
+
+`hasOwnProperty`：检测某一个属性是否为对象的私有属性（只有这个属性是私有的才可以）
+
+
+
+## EXP2
+
+```js
+var a = 4;
+function b(x, y, a){
+    console.log(a);
+    arguments[2] = 10;
+    console.log(a);
+}
+a = b(1,2,3); // a = undefined
+console.log(a)
+```
+
+> 输出：3 10 undefined
+
+`arguments`：函数内置的实参集合，不管是否设置形参，传递的实参值都在这个集合中，结构如下：
+
+```js
+arguments: {
+    0: 1,
+    1: 2,
+    2: 3,
+    length: 3,
+    callee: // 函数本身
+}
+```
+
+在非严格模式下，函数中的形参变量存在映射机制（相互之间存在影响），改变形参`arguments`的值会改变，改变`arguments`形参中对应的参数会改变
+
+
+### 映射机制
+```js
+function fn(x, y){
+    var arg = arguments;
+    arg[0] = 2;
+    console.log(x); // => 2
+    y = 1;
+    console.log(arg[1]) // => undefined
+}
+
+fn(10)
+```
+
+ARG和形参之间的映射是以ARG的索引为基础完成的，ARG中有这个索引，浏览器会完成和对应形参变量中的映射机制搭建，如果形参比ARG中的个数多，那么多出来的形成那是无法和ARG中的索引建立关联的。
+
+**arguments的映射机制，是依赖于索引而进行的**
+
+```js
+function fn(x, y){
+    var arg = arguments;
+    arg[0] = 2;
+    console.log(x); // => 2
+    arg[1] = 1;
+    console.log(y) // => undefined
+    y = 400;
+    console.log(arg[1]);
+}
+
+fn(10)
+```
+**arguments和形参的映射机制是建立在函数执行后形参赋值的一瞬，此时能建立映射机制的建立映射机制，不能建立起来的，以后不管怎么操作都无法建立了**
+
+
+### 严格模式
+
+在当前作用域的第一行添加 `"use strict"` 即可，这样在当前作用域中就开启了严格模式
+
+1. 在严格模式下不支持使用 `arguments.callee / arguments.callee.caller`
+2. 在严格模式下 `arguments` 和形参没有映射机制
+3. 不允许一个对象下有两个相同的属性名（非严格模式下，后设置的属性会覆盖前一个属性）
+4. 在严格模式下，函数执行，如果没有明确指定执行的主体（函数前面没有`.`），不再像严格模式下，统一交给 `window`，而是让 `this` 指向 `undefined`
+
+
+# 03. 逻辑或和逻辑与
+## EXP1
+```js
+var foo = 'hello';
+(function(foo){
+    /*
+        形参赋值：foo = 'hello'
+        变量提升：var foo; 这一步省略：因为在私有作用于中已经有foo这个变量了，浏览器不会重新声明重复的变量
+    */
+    console.log(foo);
+    var foo = foo || 'world';
+    console.log(foo) // => 'hello'
+})(foo); // 把全局下的foo的值作为实参传递给函数的形参 => "hello"
+console.log(foo); // => 'undefined'
+```
+
+> 结果： 'hello' 'undefined'
+
+### 逻辑或和逻辑与
+
+1. 或赋值
+
+    ```js
+    var a = 1 || 2;
+    ```
+    
+    首先验证1是真假，如果为真，把1赋值给a，如果为假，把2赋值给a
+
+2. 与赋值
+
+    ```js
+    var b = 1 && 2;
+    ```
+    
+    先验证A的真假，为真结果是B，为假结果是A
+
+EXP1. 逻辑或：
+
+```js
+function fn(x){
+    x = x || 0; // 如果x没传值，将x赋值为0 （这种写法不严谨，如果传入false就无法判断）
+}
+
+fn()
+```
+
+EXP2. 逻辑与
+
+```js
+function fn(callback){
+    callback && callback(); 
+    // 如果传入了一个callback就执行callback（不严谨，如果传入的不是方法就会导致代码报错）
+}
+
+fn(function(){
+    // ... ...
+})
+```
+
+### 逻辑与和逻辑或的混合应用模式
+
+优先级：逻辑与的优先级高于逻辑或
+
+```js
+0 || 1 && 2 || 0 || 3 && 2 || 1
+
+// 1 && 2 => 2
+// 3 && 2 => 2
+// 0 || 2 || 0 || 2 || 1
+// 2 || 0 || 2 || 1
+// 0 || 2 || 1
+// 2 || 1
+// 2
+```
+
+# 04. 有关堆栈内存释放
+```js
+var a = 9;
+function fn(){
+    a = 0;
+    return function(b){
+        return b+a++;
+    }
+}
+var f = fn();
+console.log(f(5));      // 5
+console.log(fn()(5));   // 5
+console.log(f(5));      // 6
+console.log(a)          // 2
+```
+
+![](http://ww1.sinaimg.cn/large/a71efaafly1g1v9k1h40mj20s80b4jsh.jpg)
+
+
+
+# 05. 练习题讲解
+
+## EXP1
+```js
+var arr = [1,2,3,4] // arr = bbbfff111 => [1,2,3,4]
+function fn(arr){
+ arr[0] = 0;
+ arr = [0], // arr = bbbfff222
+ arr[0] = 100;
+ return arr;
+}
+var res = fn(arr); // res = fn(bbbfff111) = bbbfff222
+console.log(arr);  // => [0,1,2,3]
+console.log(res);  // => [100]
+```
+
+> 输出：[0,1,2,3] [100]
+
+ 
+## EXP2
+
+```js
+function fn(i){
+    return function(n){
+        console.log(n + (i++));
+    }
+}
+var f = fn(10); // i=10
+f(20);          // 30  i++ => 11
+fn(20)(40);     // 60  没有人存放fn(20)，形成的作用域自动销毁
+fn(30)(50);     // 80  同上
+f(30);          // 41
+```
+
+> 结果：30 60 80 41
+ 
+
+
+# 06. 堆栈内存和this混合应用
+
+### EXP1
+```js
+var num = 10
+var obj = {num: 20};
+obj.fn = (function(num){   // num = 20
+    this.num = num * 3;  // this.num = window.num = num*3 = 60  (自执行函数在非严格模式下执行this指向为window)
+    num++;  // obj.fn.num = 21
+    return function(n){
+        this.num += n;  // this指向调用者，如果没有调用者则指向window
+        num++;  
+        console.log(num); 
+    }
+})(obj.num)  
+// window.num = 60
+// obj.fn.num = 21
+
+var fn = obj.fn;
+fn(5); // n = 5; this.num = window.num + n = 65; num++ = obj.fn.num + 1 = 22 => num = obj.fn.num = 22
+// window.num = 65
+// obj.fn.num = 22
+// obj.num = 20
+
+obj.fn(10); // n = 10; this.num + 10 = onj.num + 10 = 30; num++ = obj.fn.num+1 = 23 => num = obj.fn.num = 23
+// window.num = 65
+// obj.num = 30
+console.log(num, obj.num);
+```
+
+> 结果：22 23 65 30
+
+![](http://ww1.sinaimg.cn/large/a71efaafly1g1vceyphh9j20q60a7466.jpg)
+
+## EXP2
+```js
+var num = 10,
+  obj = { num: 20 }
+obj.fn = (function (num) {
+    num = this.num + 10;
+    this.num = num + 10;
+    return function (){
+        this.num += ++num;
+    }
+})(num); 
+// obj.fn.num = 10; 
+// obj.fn.num = this.num + 10 = window.num + 10 = 20;
+// this.num = window.num = obj.fn.num + 10 = 30;
+// => window.num = 30; obj.fn.num = 20
+// => return 000fffaaa
+
+var fn = obj.fn;
+// fn = 000fffaaa;
+
+fn();
+// num + 1 = obj.fn.num + 1 = 21
+// => obj.fn.num = 21
+// this.num = window.num = window.num + obj.fn.num = 51
+// => window.num = 51
+
+obj.fn();
+// num + 1 = obj.fn.num + 1 = 22;
+// => obj.fn.num = 22;
+// this.num = obj.num = obj.num + 22 = 42;
+// => obj.num = 42
+
+console.log(num, obj.num)
+// 51 42
+
+```
+
+
+# 07. 构造函数和原型链的运行机制
+
+## EXP1
+```js
+function Fn(){
+    this.x = 100;
+    this.y = 200;
+    this.getX = function(){
+        console.log(this.x)
+    }
+}
+
+Fn.prototype.getX = function(){
+    console.log(this.x);
+};
+Fn.prototype.getY = function(){
+    console.log(this.y);
+}
+var f1 = new Fn;
+var f2 = new Fn;
+console.log(f1.getX === f2.getX);  // false
+console.log(f1.getY === f2.getY);  // true
+console.log(f1.__proto__.getY === Fn.prototype.getY);   // true
+console.log(f1.__proto__.getX === f2.getX);  // false
+console.log(f1.getX === Fn.prototype.getX);  // false
+console.log(f1.constructor);    // {x: 100, y: 200, getX: [Function]}
+console.log(Fn.prototype.__proto__.constructor);    // null
+f1.getX();  // 100
+f1.__proto__.getX();    // null
+f2.getY();  // 200
+Fn.prototype.getY(); // null
+```
+![](http://ww1.sinaimg.cn/large/a71efaafly1g1yhkqwfxmj219v0hdwy3.jpg)
+
+### 基本数据类型和引用数据类型
+
+`1` 与 `new Number(1)` 
+
+- 前者为基本数据类型，后者为引用数据类型（对象）
+- 他们的相同点都是Number类的实例
+
+`Fn()` 与 `new Fn()`
+
+- 前者为普通函数执行，后者为构造函数执行
+- new Fn() 是一个类，他的返回值是这个类的实例
+
+### 函数类型
+1. 普通函数
+2. 构造函数（类：内置累和自己创建的类）
+
+### 对象类型
+1. 普通对象
+2. Math 、 Json
+3. 类的实例（数组、正则、日期）
+4. prototype 或者 __proto__
+5. arguments或者元素数据集合等类数组
+6. 函数也是一种对象
+7. ... 万物皆对象
+
+### prototype
+1. 每一个函数（类）都有原型属性，称作prototype，这个属性提供了可供当前类的实例调用的属性和方法。
+2. 浏览器默认给原型开辟的堆内存中有一个constructor属性，这个属性存放的是函数本身
+3. 每一个对象的实例上都有一个__proto__属性称为原型链，这个属性指向当前类的所属原型，不确定的原型都指向Object.prototype
+
+> prototype下的name属性指函数名，length属性指传入的形参的个数
+
+## EXP2
+```js
+var people = function () {
+  this.age = "18";
+}
+people.prototype.age = "20"
+
+console.log(people.age);  // undefined
+console.log(people.prototype.age);  //20
+
+var a = new people();
+console.log(a.age);  // 18
+console.log(a.__proto__.age);  // 20
+```
+1. 创建一个函数（类）后，生成的是一个堆内存，堆内存里存放的是一个字符串。
+
+2. `people`下只有两个属性，一个是`constructor`指向函数（类）本身，一个是`prototype`指向将来可执行的方法和属性，函数（类）本身也可以通过访问`prototype`来访问或执行这些方法。
+
+3. 通过`this.xx`追加的属性，并非是添加到`prototype`上，而是供实例化后，`this`把属性追加到实例化的对象上。
+
+4. 原型链的查找机制是针对于实例化的对象的，加入实例化的对象上没有某个属性，根据原型链就会去查找函数（类）身上的`constructor`中存放的方法和属性
+
+# 08. 基于闭包解决循环绑定
+
+## EXP1
+```js
+var btnBox = document.getElementById('btnBox');
+    inputs = btnBox.getElementsByTagName('input');
+for(var i=0; i<inputs.length; i++){
+    inputs[i].onclick = function(){
+        alert(i);
+    }
+}
+```
+
+### 事件绑定为什么会导致出错
+事件绑定是异步变成，当触发点击行为，绑定的方法执行的时候，外层循环已经结束；方法执行产生私有作用域，用到变量i，不是私有的变量，按照作用域链查找的机制，查找的是全局下的
+
+### 解决方案
+1. 自定义属性
+2. 闭包
+3. ES6
+
+### 闭包解决
+
+```js
+var btnBox = document.getElementById('btnBox');
+    inputs = btnBox.getElementsByTagName('input');
+for(var i=0; i<inputs.length; i++){
+    inputs[i].onclick = (function(i){
+        return(function(){
+            alert(i);
+        })
+    })(i)
+}
+```
+![](http://ww1.sinaimg.cn/large/a71efaafly1g1yoebvbnpj20r50b50zu.jpg)
+
+
+# 09. 关于this的两道题
+
+## EXP1
+```js
+var fullName = 'language';
+var obj = {
+    fullName: 'javascrtpt',
+    prop: {
+        getFullName: function(){
+            return this.fullName;
+        }
+    }
+};
+console.log(obj.prop.getFullName()); // this => obj.prop; obj.prop没有name属性; undefined
+var test = obj.prop.getFullName;
+console.log(test()); // this => window.fullName(严格模式); language
+```
+
+### this指向判断
+1. 元素绑定事件，方法中的this是当前操作的元素
+2. 方法名签是否有点，有点，点前面是谁this就是谁，没有this是window(严格模式下是undefined)
+3. 构造函数执行，方法中的this是当前类的一个实例
+
+
+## EXP2
+```js
+var name = 'window';
+var Tom = {
+    name: 'Tom',
+    show: function(){
+        console.log(this.name); // 4. 'window'
+    },
+    wait: function(){
+        var fun = this.show; // 2. => this: Tom
+        fun(); // 3. => this: window
+    }
+};
+Tom.wait(); // 1. => this: Tom
+```
+
+# 10. 关于原型重定向问题
+
+## EXP1
+```js
+function fun(){
+    this.a = 0;
+    this.b = function(){
+        alert(this.a);
+    }
+}
+fun.prototype = {
+    b: function(){
+        this.a = 20;
+        alert(this.a);
+    },
+    c: function(){
+        this.a = 30;
+        alert(this.a);
+    }
+}
+var my_fun = new fun();
+my_fun.b(); // 0
+my_fun.c(); // this => my_fun.a = 30 ; 30
+```
+> 结果：0 30
+
+`my_fun.a` 用来设置私有属性
+
+`my_fun.__proto__.a` 用来设置公有属性
+
+### 原型重定向导致的问题
+1. 自己开辟的堆内存中没有`constructor`属性，导致类的原型构造函数缺失（解决：自己手动在堆内存中增加`constructor`属性）
+2. 当原型重定向后，浏览器默认开辟的那个类原型堆内存会被释放掉，如果之前已经存储了一些方法或属性，都会丢失（所以：内置累的原型不允许重定向到自己开辟的堆内存，因为内置类的原型上存在很多属性方法，重定向后都没了，这样是不被允许的；但浏览器对内置类有保护机制）
+3. 当我们需要给类的原型批量设置属性和方法的时候，一般都是让原型重定向到自己创建的对象中
+
+# 11. 关于原型重定向综合性练习
+
+## EXP1
+```js
+function Fn(){
+  var n = 10;
+  this.m = 20;
+  this.aa = function(){
+      console.log(this.m);
+  }
+}
+
+Fn.prototype.bb = function(){
+  console.log(this.n);
+}
+
+var f1 = new Fn;
+
+Fn.prototype = {
+  aa: function(){
+      console.log(this.m + 10);
+  }
+};
+
+var f2 = new Fn;
+console.log(f1.constructor);  // [Function: Fn]
+console.log(f2.constructor);  // f2.constructor => 找不到 => f2._prototype_.constructor => [Function: Object]
+f1.bb();  // undefined
+f1.aa();  // 20
+f2.bb();  // TypeError: f2.bb is not a function
+f2.aa();  // 20
+f2.__proto__.aa(); // this.m + 10 => f2.__proto__.m + 10 => Fn.prototype.m + 10 => undefined + 10 => NaN
+```
+
+# 12. 数组去重引发的基于内置类原型拓展方法，并且实现链式调用
+
+## EXP1:
+**实现一个数组查重方法。**
+
+思路：
+
+依次遍历数组中的每一项, 让每一项的值作2为对象的属性名和属性值(属性值存啥都可以)，每一次存储之前验证当前对象中是2否已经存在这个属性了(in/hasOwnProperty/属性值不是undefined...),如果2有这个属性了，说明当前项在数组中已经存在J ,我们把当前项在原有数组中移除即可,如果不存在，存储到对象中即可
+
+解答：
+
+```js
+function unique(ary){
+    var obj = {};
+    for(var i=0; i<ary.length; i++){
+        var item = ary[i];
+        if(obj.hasOwnProperty(item)){
+            ary.splice(i, 1);
+            i--; // 处理数组塌陷
+            continue;
+        }
+        obj[item] = item;
+    }
+    return ary;
+}
+```
+
+性能优化：把当前重复项赋值为数组最后一项，再删除数组最后一项
+
+```js
+function unique(ary){
+    var obj = {};
+    for(var i=0; i<ary.length; i++){
+        var item = ary[i];
+        if(obj.hasOwnProperty(item)){
+            ary[i] = ary[ary.length. 1];
+            ary.pop();
+            i--; // 处理数组塌陷
+            continue;
+        }
+        obj[item] = item;
+    }
+    obj = null; // 手动释放内存
+    return ary;
+}
+```
+
+这个例子`unique`方法开辟的栈内存销毁，因为传入的`ary`是一个对象的地址，返回的`ary`也是一个同一个对象的地址，而这个对象是在外部定义的，所以外部并未占用`unique`方法内部的任何变量，所以栈内存运行完成之后直接销毁。
+
+基于内置类的原型扩展方法，供它的实例调取使用：
+
+```js
+// 命名准则加一个前缀，区分原生Javascript提供的方法，`myUnique`可有可无
+Array.prototype.myUnique = function myUnique() {
+  // 一般情况下（不使用__proto__和prototype调用方法），this指的就是调用该方法的数组本身
+  var obj = {};
+  for (var i = 0; i < this.length; i++) {
+    var item = this[i];
+    if (obj.hasOwnProperty(item)) {
+      ary[i] = ary[ary.length. 1];
+      ary.pop();
+      i--; // 处理数组塌陷
+      continue;
+    }
+    obj[item] = item;
+  }
+  obj = null; // 手动释放内存
+  // 不需要return，改变this就相当于操作原有数组
+  // 如果需要链式操作，可以返回
+  return this;
+}
+
+var ary = [11, 22, 22, 33, 1, 1, 111, 11, 2, 3, 4];
+ary.myUnique()
+console.log(ary);
+```
+
+# 13. 闭包和团队协作开发
+
+## EXP1
+
+**怎么规避多人开发函数重名的问题？**
+
+基于单例实体模式来实现模块化开发（或闭包）。把实现当前模块的功能和属性放在同一个命名空间之下。
+
+## EXP2
+
+**Javascript如何实现面向对象中的继承？**
+
+## EXP3
+
+**你理解的闭包作用是什么，优缺点？**
+
+闭包就是Javascript的一个机制，通过函数执行形成一个不销毁的私有作用域(栈内存)，既保护了里面的私有变量，能让与外界隔离，又保存了变量的信息。总的来说闭包在项目中提供了保存和保护的两个功能。
+
+对于保护功能，在封装插件时，为了不让插件中的方法与外界冲突，采用闭包可以保护这些方法命名。
+
+对于保存功能，当使用循环事件绑定时，当调用循环变量i会成为全局作用域下的i，此时i指的是循环变量的最终状态，采用闭包机制可以在循环时形成一个不销毁的私有作用域，把后期需要用的索引提前保存起来。
+
+惰性思想和柯里化模型都是基于闭包实现的。
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
