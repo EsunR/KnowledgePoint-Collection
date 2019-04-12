@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>1px物理像素的实现</title>
+  <style>
+    .box {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-bottom: 10px solid #000000;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    window.onload = function () {
+      // 获取像素比 
+      var dpr = window.devicePixelRatio;
+
+      // 缩放比例
+      var scale = 1 / dpr;
+
+      var width = document.documentElement.clientWidth;
+
+      // 获取meta标签
+      var metaNode = document.querySelector("meta[name='viewport']");
+      metaNode.setAttribute('content', 'width=device-width, initial-scale=' + scale)
+
+      var htmlNode = document.querySelector('html');
+      htmlNode.style.fontSize = width * dpr + 'px';
+    }
+  </script>
+
+  <div class="box"></div>
+</body>
+
+</html>
