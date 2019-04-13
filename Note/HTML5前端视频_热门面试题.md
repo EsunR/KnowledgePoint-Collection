@@ -16,7 +16,7 @@ console.log(num2);   // 100
 console.log(num);    // num is not defined
 ```
 
-## 07. 物理像素的实现
+## 07. 响应式布局
 
 ### viewport影响着我们页面的什么？
 
@@ -75,7 +75,7 @@ viewport是虚拟显示视口，它是时刻存在的（在现代浏览器上）
 
 - 当最宽的元素宽度大于980px（或者我们设置的最大viewport宽度），就会出现横向滚动条来显示我们页面中最宽的元素。
 
-### 什么是物理像素？
+### 什么像素比和物理像素？
 
 > 像素比(dpr) = 物理像素 / css像素
 
@@ -86,7 +86,7 @@ viewport是虚拟显示视口，它是时刻存在的（在现代浏览器上）
 拿iPhoneSE来说，我们都知道iPhoneSE的分辨率为`640 x 1136`，而如果我们使用chrome调试工具将页面切换为移动端设备视图，我们会发现chrome显示的设备分辨率为`320 x 568`。
 
 
-![调试工具界面](https://s2.ax1x.com/2019/04/12/Aq8rct.png)
+![调试工具界面](https://s2.ax1x.com/20 19/04/12/Aq8rct.png)
 
 
 这是因为我们在手机上定义像素如果还按照大屏显示器那样去规定像素的话，文字、识图都会看起来小到无法识别（想象一下你将显示器缩小为如同手机那样的大小你还能看清屏幕上的文字吗），所以我们规定了一个**缩放比**来优化显示效果。
@@ -103,18 +103,37 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
 
 ![viewport默认宽度](https://ws1.sinaimg.cn/large/a71efaafly1g20qkjqqk2j20b903k742.jpg)
 
-2. 如果我们定义了viewport的宽度为设备宽度，那么在iPhoneSE上，我们看到的定义为200px宽高的元素的实际物理像素宽高为 `640*(200/320)px`
+2. 如果我们定义了viewport的宽度为设备宽度，那么在iPhoneSE上，我们看到的定义为200px宽高的元素的实际物理像素宽高为 `640*(200/320)px`，即为 `CSS像素*DPR`。
 
 ![定义viewport宽度为设备宽度](https://ws1.sinaimg.cn/large/a71efaafly1g20ql88ex7j20dy07g744.jpg)
 
 
 ### 何为缩放比
 
+缩放比即为我们再meta标签中设置的 `initial-scale`。它指的是当我们用移动设备去查看页面时，页面会被放大的倍数，只在我们设定viewport宽度后生效。
 
-### 方案一
+比如，当我们定义，如下meta标签，显示在ipad等移动设备上页面会被放大两倍：
 
-思路：这道题的目的在于，让显示器设备和移动设备都享有同样的CSS像素，即手机上的。控制 `initial-scale` 缩放比。
+```html
+<meta name="viewport" content="width=device-width, initial-scale=2">
+```
 
+![桌面显示器显示效果](https://ws1.sinaimg.cn/large/a71efaafly1g20rh126ccj20te09y3yg.jpg)
+
+
+![ipad显示效果](https://ws1.sinaimg.cn/large/a71efaafly1g20rhi7fabj20st0chq30.jpg)
+
+那缩放比具体有什么卵用呢？
+
+当我们浏览一个移动端页面，针对页面上的一个按钮，如果不设置缩放，iPhoneSE和iPhone6 Plus会按照同样的按钮大小去展示。但这样的话iPhone6 Plus由于屏幕更大，显示按钮就会显得过小，观感上很不协调，所以我们这时候就可以将其缩放比设置为 `414/320` 即为 `1.29` ，即代表这个按钮在iPhone6 Plus上会按照1.29倍等比例放大，这样整个页面的观感就会更好。
+
+当然如果我们采用 `rem` 机制去动态改变元素的宽高和字体大小，也能达到同样的效果。
+
+### 1px物理像素的实现
+
+思路：这道题的目的在于，让显示器设备和移动设备都享有同样的CSS像素，即有相同的物理像素，让手机端按1个真实的物理像素点去显示页面上的1px。我们可以通过获取设备的像素比，加上利用meta标签的缩放设置，将页面缩放设置为 `1/像素比`。
+
+**方案一：**
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -158,4 +177,326 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
 
 </html>
 ```
+
+
+**方案二：**
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>1px物理像素的实现</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      position: relative;
+    }
+
+    #box::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 10px;
+      background: #000000;
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+      #box::before{
+        transform: scaleY(0.5);
+      }
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 3){
+      #box::before{
+        transform: scaleY(0.3333);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    console.log(window.devicePixelRatio);
+  </script>
+  <div id="box"></div>
+</body>
+
+</html>
+```
+
+
+## 08. 元素居中的方案
+
+```html
+<style>
+  .container {
+    width: 500px;
+    height: 500px;
+    background-color: pink;
+  }
+
+  .inner {
+    width: 200px;
+    height: 200px;
+    background-color: skyblue;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <div class="inner"></div>
+  </div>
+</body>
+```
+
+![](https://ws1.sinaimg.cn/large/a71efaafly1g20tjc5qo2j20e50e73ye.jpg)
+
+### 利用postiton定位
+```css
+.container{
+  position: relative;
+}
+.inner{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+```
+
+### 利用margin和定位
+
+```css
+.container{
+  position: relative;
+}
+.inner{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+}
+```
+
+### 利用CSS3的margin和transform（可以实现未知宽高元素居中）
+
+```css
+.container{
+  position: relative;
+}
+.inner{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 上下左右平移自身宽度的50% */
+}
+```
+
+### 利用flex布局
+
+**传新版本：**
+```css
+.container{
+  display: flex;
+  justify-content: center; /* 水平（主轴）居中 */
+  align-items: center; /* 垂直（侧轴）居中 */
+}
+```
+
+**旧版本：**
+```css
+.container{
+  display: -webkit-box;
+  -webkit-box-pack: center; /* 水平（主轴）居中 */
+  -webkit-box-align: center; /* 垂直（侧轴）居中 */
+}
+```
+
+## 09. 纯CSS绘制三角形
+
+```html
+<!-- 05.html -->
+<style>
+  .box {
+    width: 0;
+    height: 0;
+    border: 100px solid;
+    border-bottom-color: pink;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+</style>
+
+<body>
+  <div class="box"></div>
+</body>
+```
+
+![](https://ws1.sinaimg.cn/large/a71efaafly1g20u6saknfj206806i742.jpg)
+
+> 注意：用这种方法绘制三角形，必须设置元素上下左右都有border，不能单纯设置一个底部边框，否则会没有显示效果
+
+## 10. rem适配
+
+核心要点：改变页面根元素的`font-size`来改变rem相对宽度
+
+```html
+<!-- 06.html -->
+<style>
+  .box{
+    width: .5rem;
+    height: .5rem;
+    background-color: pink;
+  }
+</style>
+
+<script>
+  window.onload = function () {  
+    var width = document.documentElement.clientWidth;
+    var htmlNode = document.querySelector('html');
+    htmlNode.style.fontSize = width + 'px';
+  }
+</script>
+
+<body>
+  <div class="box"></div>
+</body>
+```
+
+设置后，在所有设别上，div的宽度和高度均为设备屏幕宽度的一半
+
+## 12. js综合面试题（作用域、this指向、原型链）
+
+```js
+// 作用域/02.js
+function Foo() {
+  getName = function () {
+    console.log(1);
+  }
+  return this;
+}
+Foo.getName = function () {
+  console.log(2);
+}
+Foo.prototype.getName = function () {
+  console.log(3);
+}
+var getName = function () {
+  console.log(4);
+}
+function getName() {
+  console.log(5);
+}
+
+Foo.getName();  // 2
+
+getName();  // 5(x) 4
+
+Foo().getName();  // 执行Foo()方法 => 将window下的getName进行赋值操作 => 返回一个window对象 => 执行window下的getName()方法
+
+getName();  // 1 （此时window下的getName方法已被上一行代码改变）
+
+new Foo.getName(); // 实例化一个Foo对象 => 调用这个实例化对象上的getName() => 查找实例的constructor构造函数上有没有getName方法，没有的话去__proto__上查找 => 在Foo上找到getName方法 => 2
+
+new new Foo().getName(); // 实例化一个Foo对象 => 执行Foo返回一个window对象 => 实例化一个window对象 => 查找window对象上的getName方法
+```
+
+> 输出结果：2 4 1 1 2 3  （代码在node环境会因为this指向问题而报错。具体原因是因为当在顶层作用域直接执行Foo()函数时候，返回的this在浏览器环境下是`window`，而在node下是`global`）
+
+**错误总结：**由于javascript存在变量提升机制，所以正确的代码执行书序应该为：
+
+```js
+function Foo() {
+  getName = function () {
+    console.log(1);
+  }
+  return this;
+}
+var getName // 定义被忽略
+function getName() {
+  console.log(5);
+}
+// ====== 变量提升、变量声明执行完毕 ======
+// ====== 接下来进行变量赋值 ======
+
+Foo.getName = function () {
+  console.log(2);
+}
+Foo.prototype.getName = function () {
+  console.log(3);
+}
+getName = function () {
+  console.log(4);
+}
+```
+
+要注意的是当变量的声明和函数的声明命名冲突时，会优先定义函数。但`getName`在被声明后，在后方又被进行了赋值操作，所以`getName`的值应该为后方赋值的结果
+
+## 13. 函数节流和防抖
+
+### 节流函数
+
+通过节流函数，检测两次函数调用的时间差，如果在设定的函数冷却时间之内，则不能执行，如果在冷却时间之外则可以执行。通过函数节流可以优化Javascript的性能，防止一个函数被无差别的多次反复执行。
+
+```js
+// JS核心/01.js
+/**
+ * 函数节流
+ * @param fn 要被节流的函数
+ * @param delay 规定的时间（函数执行的冷却时间）
+ */
+function throttle(fn, delay) {
+  var lastTime = 0;
+  // 需要通过闭包来保存lastTime的状态，否则每次调用lastTime都会被初始化为0
+  return function () {
+    var nowTime = Date.now();
+    if (nowTime - lastTime > delay) {
+      fn();
+      lastTime = Date.now();
+    }
+  };
+}
+
+var fun = throttle(function () {
+  console.log("触发了！");
+}, 500);
+
+fun();
+
+setTimeout(function () {
+  fun();
+}, 400)
+
+setTimeout(function () {
+  fun();
+}, 600)
+```
+
+输出结果:
+```
+触发了！
+触发了！
+```
+
+
+
+
+
+
+
+
+
+
+
 

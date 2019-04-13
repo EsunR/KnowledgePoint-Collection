@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>1px物理像素的实现</title>
   <style>
     .box {
-      width: 0.5rem;
-      height: 0.5rem;
-      border-bottom: 10px solid #000000;
+      width: 200px;
+      height: 200px;
+      background-color: pink;
     }
   </style>
 </head>
@@ -30,6 +30,7 @@
       var metaNode = document.querySelector("meta[name='viewport']");
       metaNode.setAttribute('content', 'width=device-width, initial-scale=' + scale)
 
+      // 页面中的元素，高度、宽度比利需要反向程回来
       var htmlNode = document.querySelector('html');
       htmlNode.style.fontSize = width * dpr + 'px';
     }
