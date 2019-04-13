@@ -629,13 +629,13 @@ undefined
 
 请求报文由请求行（request line）、请求头（header）、请求体四个部分组成,如下图所示：
 
-![请求报文](https://segmentfault.com/img/remote/1460000017184708)
+![](https://ws1.sinaimg.cn/large/a71efaafly1g21brwf6mmj20h406r0uf.jpg)
 
 ### 服务器处理请求并返回 HTTP 报文
 
 http 响应报文：
 
-![响应报文](https://segmentfault.com/img/remote/1460000017184711)
+![](https://ws1.sinaimg.cn/large/a71efaafly1g21bs7xehxj20bb080mxu.jpg)
 
 (1) 响应行包含：协议版本，状态码，状态码描述
 
@@ -652,7 +652,7 @@ http 响应报文：
 
 ### 浏览器解析渲染页面
 
-![](https://segmentfault.com/img/remote/1460000017184712)
+![](https://ws1.sinaimg.cn/large/a71efaafly1g21bsfijrnj20kw0760ti.jpg)
 
 浏览器解析渲染页面分为一下五个步骤：
 
@@ -666,7 +666,7 @@ http 响应报文：
 
 当数据传送完毕，需要断开 tcp 连接，此时发起 tcp 四次挥手。
 
-![](https://segmentfault.com/img/remote/1460000017184713)
+![](https://ws1.sinaimg.cn/large/a71efaafly1g21bsm7ci8j20i40ciwic.jpg)
 
 
 ## 19. 宏任务和微任务
