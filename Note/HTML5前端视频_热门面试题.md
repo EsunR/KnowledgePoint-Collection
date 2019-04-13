@@ -43,7 +43,11 @@ viewport是虚拟显示视口，它是时刻存在的（在现代浏览器上）
 
 看起来布局上似乎很完美，但当我们添加上文字后，在我们的手机上就会这样显示：
 
+<center>
+
 ![](http://ww1.sinaimg.cn/large/a71efaafly1g20701i07xj20a70grglk.jpg)
+
+</center>
 
 文字内容简直小的可怜，这就是为什么我们不愿意去使用默认的viewport：他会无视我们手中实际设备的宽度去按照960px的宽度渲染页面，然后将渲染好的页面进行**缩放**再塞入我们的手机显示器，导致页面被缩放的过小。假入我们此时规定viewport的宽度与设备宽度相等，如下加入meta标签：
 
@@ -53,11 +57,21 @@ viewport是虚拟显示视口，它是时刻存在的（在现代浏览器上）
 
 对于iPhoneSE来说，它的宽度为320px，那么viewport就以320px的宽度去渲染页面而非980px，之后渲染好的页面就不会被缩放，而是直接显示在我们的手机上，如下效果：
 
+<center>
+
 ![](http://ww1.sinaimg.cn/large/a71efaafly1g206ylbrbsj20ae0h3q2x.jpg)
 
-当然，我们也能看出，我们再下方定义的固定宽高的div，也同样会被缩放，这就是为什么我们推荐在响应式开发中使用半分比宽度而非绝对宽度，这会导致元素的缩放不合理，当有元素超过我们的viewport宽度后，viewport机制就会错乱，分为以下两种情况：
+</center>
+
+当然，我们也能看出，我们再下方定义的固定宽高的div，也同样会被缩放，这就是为什么我们推荐在响应式开发中使用半分比宽度而非绝对宽度，这会导致元素的缩放不合理，当有元素超过我们的viewport宽度后，viewport机制就会错乱，分为以下两种情况（针对Chrome和最新的Android Webview）：
 
 - 如果我们设置了viewport，此时固定元素宽度如果大于设置的viewport宽度，viewport的宽度会回变化为页面最宽的元素，来显示过宽的元素，但是如果宽度设置为100%的元素，宽度仍保持原有的viewport宽度。
+
+<center>
+
+![将Div#container宽度设置为400px](https://ws1.sinaimg.cn/large/a71efaafly1g20q6hhhlsj209t0goq2w.jpg)
+
+</center>
 
 - 当最宽的元素宽度大于980px（或者我们设置的最大viewport宽度），就会出现横向滚动条来显示我们页面中最宽的元素。
 
@@ -71,21 +85,30 @@ viewport是虚拟显示视口，它是时刻存在的（在现代浏览器上）
 
 拿iPhoneSE来说，我们都知道iPhoneSE的分辨率为`640 x 1136`，而如果我们使用chrome调试工具将页面切换为移动端设备视图，我们会发现chrome显示的设备分辨率为`320 x 568`。
 
-![Aq8rct.png](https://s2.ax1x.com/2019/04/12/Aq8rct.png)
+
+![调试工具界面](https://s2.ax1x.com/2019/04/12/Aq8rct.png)
+
 
 这是因为我们在手机上定义像素如果还按照大屏显示器那样去规定像素的话，文字、识图都会看起来小到无法识别（想象一下你将显示器缩小为如同手机那样的大小你还能看清屏幕上的文字吗），所以我们规定了一个**缩放比**来优化显示效果。
 
-iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得到的结果便是 `320 x 568` ，即为chrome上显示的结果。
+iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得到的结果便是 `320 x 568` ，即一个实际像素显示2个物理像素。
 
+![1px指的是CSS像素](https://ws1.sinaimg.cn/large/a71efaafly1g20qd6m9paj20m90a474k.jpg)
 
-### 应用
+### 计算页面元素真实的物理像素
 
 那假如我们再页面上定义了一个200px宽高的div，那么它在iPhoneSE上显示的实际大小为多少呢。
 
-再此分两种情况计算。
+1. 如果我们不定义viewport，viewport在所有的显示设备上的显示宽度均为980px。那么在iPhoneSE上，我们看到的定义的200px宽高的元素的实际物理像素宽高为 `640*(200/980)px`。
 
-如果我们不定义viewport，viewport在所有的显示设备上的显示宽度均为980px。那么在iPhoneSE上，我们看到的200px宽高的元素的实际物理像素宽高为 `320*(200/980)px`。
+![viewport默认宽度](https://ws1.sinaimg.cn/large/a71efaafly1g20qkjqqk2j20b903k742.jpg)
 
+2. 如果我们定义了viewport的宽度为设备宽度，那么在iPhoneSE上，我们看到的定义为200px宽高的元素的实际物理像素宽高为 `640*(200/320)px`
+
+![定义viewport宽度为设备宽度](https://ws1.sinaimg.cn/large/a71efaafly1g20ql88ex7j20dy07g744.jpg)
+
+
+### 何为缩放比
 
 
 ### 方案一
