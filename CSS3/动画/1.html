@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .row {
+      width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      perspective: 1000px;
+    }
+
+    .col-6 {
+      width: 50%;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+
+    .content {
+      background-color: #FF5722;
+      height: 200px;
+      transition: all .2s linear;
+      top: 0;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .position {
+      position: relative;
+    }
+
+    .position:hover {
+      top: -10px;
+    }
+
+    .scale:hover {
+      transform: scale(1.1);
+    }
+
+    .translate:hover {
+      transform: translate(10px, 10px);
+    }
+
+    .rotate:hover {
+      transform: rotate(45deg);
+    }
+
+    .rotateY:hover {
+      transform: rotateY(180deg);
+    }
+    .translateZ:hover{
+      transform: translateZ(50px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-6">
+      <div class="content position">position: relitive; top: -10px;</div>
+    </div>
+    <div class="col-6">
+      <div class="content scale">transform: scale(1.1);</div>
+    </div>
+    <div class="col-6">
+      <div class="content translate">transform: translate(-10px, -10px);</div>
+    </div>
+    <div class="col-6">
+      <div class="content rotate">transform: rotate(45deg);</div>
+    </div>
+    <div class="col-6">
+      <div class="content rotateY">transform: rotateY(360deg);</div>
+    </div>
+    <div class="col-6">
+      <div class="content translateZ">transform: translateZ(400px);</div>
+    </div>
+  </div>
+</body>
+
+</html>

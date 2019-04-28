@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 100px auto;
+      cursor: pointer;
+    }
+
+    .box .inner {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      backface-visibility: hidden;
+      transition: all 1s;
+    }
+
+    .force {
+      transform: rotateY(0deg);
+    }
+
+    .box:hover .force{
+      transform: rotateY(180deg);
+    }
+
+    .back {
+      transform: rotateY(180deg);
+    }
+
+    .box:hover .back{
+      transform: rotateY(0deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="inner back">反面</div>
+    <div class="inner force">正面</div>
+  </div>
+</body>
+
+</html>
