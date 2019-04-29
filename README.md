@@ -37,7 +37,7 @@
 - [CSS3动画](https://github.com/EsunR/Daily-Study/blob/master/Note/KnowledgePoint/CSS动画.md)
 
 
-## [知识点集合](https://github.com/EsunR/Daily-Study/blob/master/Note/知识点集合.md)
+## 知识点集合 - [链接](https://github.com/EsunR/Daily-Study/blob/master/Note/知识点集合.md)
 
 - mouseover、mouseout和mouseenter、mouseleace事件的区别
 - 事件处理程序属性和addEventListener的区别
