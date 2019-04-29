@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    var localHandler = function (data) {
+      alert('我是本地函数，可以被跨域的remote.js文件调用，远程js带来的数据是：' + data.result);
+    };
+  </script>
+  <script>
+    localHandler({ "result": "我是远程js带来的数据" })
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -35,3 +35,11 @@
 - [关于CSS-BFC](https://github.com/EsunR/Daily-Study/blob/master/Note/KnowledgePoint/BFC.md)
 
 - [CSS3动画](https://github.com/EsunR/Daily-Study/blob/master/Note/KnowledgePoint/CSS动画.md)
+
+
+## [知识点集合](https://github.com/EsunR/Daily-Study/blob/master/Note/知识点集合.md)
+
+- mouseover、mouseout和mouseenter、mouseleace事件的区别
+- 事件处理程序属性和addEventListener的区别
+- addEventListener()的第二个参数
+- JSONP原理简述

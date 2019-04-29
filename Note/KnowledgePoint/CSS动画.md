@@ -1,3 +1,6 @@
+> 参考文章: https://www.cnblogs.com/smyhvae/p/8435182.html  
+> Demo: https://github.com/EsunR/Daily-Study/blob/master/CSS3/动画/
+
 - [1. transition 过度](#1-transition-%E8%BF%87%E5%BA%A6)
   - [1.1 复合样式](#11-%E5%A4%8D%E5%90%88%E6%A0%B7%E5%BC%8F)
     - [property：](#property)
@@ -18,7 +21,6 @@
   - [4.1 定义步骤](#41-%E5%AE%9A%E4%B9%89%E6%AD%A5%E9%AA%A4)
   - [4.2 动画属性](#42-%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7)
 
-> 参考文章 https://www.cnblogs.com/smyhvae/p/8435182.html
 
 # 1. transition 过度
 
