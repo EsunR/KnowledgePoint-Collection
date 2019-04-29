@@ -36,6 +36,8 @@
 
 - [CSS3动画](https://github.com/EsunR/Daily-Study/blob/master/Note/KnowledgePoint/CSS动画.md)
 
+- [HTTP状态码](./Note/KnowledgePoint/HTTP状态码.md)
+
 
 ## 知识点集合 - [链接](https://github.com/EsunR/Daily-Study/blob/master/Note/知识点集合.md)
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    window.onload = function () {
+      let a = document.querySelector('.a');
+      a.addEventListener('click', () => {
+        console.log(1);
+      })
+      a.addEventListener('touchstart', () => {
+        console.log(2);
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <div class="a" style="width: 200px; height: 200px; background-color: pink;">
+  </div>
+</body>
+
+</html>
