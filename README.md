@@ -40,12 +40,9 @@
 
 - [网络安全](./Note/KnowledgePoint/网络安全.md)
 
-- [SVG与Canvas](./Note/KnowledgePoint/SVG与Canvas.md)
+- [SVG](./Note/KnowledgePoint/SVG.md)
 
+- [Canvas入门教程](./Note/KnowledgePoint/Canvas入门教程.md)
 
-## 知识点集合 - [链接](./Note/知识点集合.md)
+## 知识点集合（持续更新中） - [链接](./Note/知识点集合.md)
 
-- mouseover、mouseout和mouseenter、mouseleace事件的区别
-- 事件处理程序属性和addEventListener的区别
-- addEventListener()的第二个参数
-- JSONP原理简述
