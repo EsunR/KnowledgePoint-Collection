@@ -40,6 +40,8 @@
 
 - [网络安全](./Note/KnowledgePoint/网络安全.md)
 
+- [SVG与Canvas](./Note/KnowledgePoint/SVG与Canvas.md)
+
 
 ## 知识点集合 - [链接](./Note/知识点集合.md)
 
