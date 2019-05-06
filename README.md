@@ -44,5 +44,9 @@
 
 - [Canvas入门教程](./Note/KnowledgePoint/Canvas入门教程.md)
 
+- [变量类型和计算](./Note/KnowledgePoint/变量类型和计算.md)
+
+- [原型和原型链](./Note/KnowledgePoint/原型和原型链.md)
+
 ## 知识点集合（持续更新中） - [链接](./Note/知识点集合.md)
 
