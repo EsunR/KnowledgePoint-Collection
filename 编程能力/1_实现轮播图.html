@@ -1,0 +1,41 @@
+<!-- 
+用html+css+js实现一个轮播图，功能如下：
+1. 支持自动播放
+
+2. 支持移动端事件
+
+3. 支持无限无缝切换，即滑动到第一张或者最后一张继续滑动则可以继续往前或往后翻页
+
+4. 支持回调事件
+
+5. 按住鼠标/手指按住图片可随鼠标/手指滑动，当移动距离超过图片的1/2时则翻页，不超过则恢复原样 
+ -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./index.css">
+  <script src="./index.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="slideBanner">
+    <div class="left arrow"><</div>
+    <div class="img_box">
+      <ul class="img_inner_box">
+        <li><img src="./img/1.jpg"></li>
+        <li><img src="./img/2.jpg"></li>
+        <li><img src="./img/3.jpg"></li>
+      </ul>
+    </div>
+    <div class="right arrow">></div>
+  </div>
+</body>
+
+</html>

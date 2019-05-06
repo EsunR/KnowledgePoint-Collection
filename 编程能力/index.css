@@ -1,0 +1,39 @@
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#slideBanner{
+  position: absolute;
+  display: flex;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#slideBanner .img_box {
+  width: 1020px;
+  height: 640px;
+  background-color: pink;
+  overflow: hidden;
+}
+#slideBanner .img_inner_box{
+  display: flex;
+  position: relative;
+  left: -1020px;
+}
+
+#slideBanner .img_box img {
+  width: 1020px;
+  height: 640px;
+}
+#slideBanner .arrow{
+  width: 100px;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+  cursor: pointer;
+}
