@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script>
+    /**
+   * 封装DOM查询的例子，可以由id获取到对应的dom元素;
+   * 获取到的DOM节点后
+   */
+    (function () {
+      // 这是一个工厂类方法，调用这个方法，返回个一个新的实例化对象
+      function $(id) {
+        if (id == null) {
+          throw new Error("请传入id")
+        }
+        return new Elem(id);
+      }
+
+      function Elem(id) {
+        this.elem = document.getElementById(id);
+      }
+
+      Elem.prototype.html = function (html) {
+        if (html == null) {
+          return this.elem.innerHTML;
+        } else {
+          this.elem.innerHTML = html;
+          return this; // 返回this，便于链式操作
+        }
+      }
+
+      Elem.prototype.on = function (eventType, fn) {
+        if (eventType != null && fn != null) {
+          this.elem.addEventListener(eventType, fn);
+          return this;
+        } else {
+          throw new Error('请传入“事件类型”，“执行方法”！');
+        }
+      }
+
+      // 向外暴露方法（模拟jQuery的写法）
+      window.$ = $;
+    })()
+  </script>
+  <script>
+    window.onload = function () {
+      $('btn1').on('click', function () {
+        $('div').html('变更了呦！')
+      })
+      $('btn2').on('click', function () {
+        alert($('div').html());
+      })
+
+      var div = $('div');
+      div.on('click', function () {
+        console.log(div.html());
+      })
+    }
+  </script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="div" style="width: 200px; height: 100px; background-color: pink;">test</div>
+  <button id="btn1">点击改变div中的innerHTML</button>
+  <button id="btn2">点击获取div中的innerHTML</button>
+</body>
+
+</html>
