@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+
+    /**
+     * 通用事件绑定函数
+     * elem为绑定事件的DOM对象
+     * type为事件类型
+     * selector为以代理模式绑定事件后，被代理元素的选择器
+     * fn为绑定的方法
+    */
+    function bindEvent(elem, type, selector, fn) {
+      if (fn == null) {
+        fn = selector;
+        selector = null;
+      }
+      if (selector) {
+        // 代理模式
+        elem.addEventListener(type, function (e) {
+          var target = e.target;
+          // 如果元素被指定的选择器字符串选择，Element.matches()  方法返回true; 否则返回false。
+          if (target.matches(selector)) {
+            fn.call(target, e);
+          }
+        })
+      } else {
+        // 非代理模式
+        elem.addEventListener(type, fn)
+      }
+    }
+  </script>
+  <script>
+    window.onload = function () {
+      var oDiv = document.querySelector('#div');
+      bindEvent(oDiv, 'click', function () {
+        console.log('点击了普通Div');
+      })
+      var oUl = document.querySelector('#ul');
+      bindEvent(oUl, 'click', 'a', function () {
+        console.log(this);
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <div id="div">普通DIV</div>
+  <ul id="ul">
+    <li><a href="#">网站链接1</a></li>
+    <li><a href="#">网站链接2</a></li>
+    <li><a href="#">网站链接3</a></li>
+    <li><a href="#">网站链接4</a></li>
+    <li><a href="#">网站链接5</a></li>
+    <li><a href="#">网站链接6</a></li>
+    <li><a href="#">网站链接7</a></li>
+    <li><a href="#">网站链接8</a></li>
+    <li><a href="#">网站链接9</a></li>
+    <li><a href="#">网站链接10</a></li>
+  </ul>
+</body>
+
+</html>

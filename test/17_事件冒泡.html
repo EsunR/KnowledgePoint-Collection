@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    window.onload = function () {
+      var oDiv1 = document.getElementById("div1");
+      var oDiv2 = document.getElementById("div2");
+      oDiv1.onclick = function (e) {
+        e.stopPropagation();
+        console.log("div1触发了！");
+      }
+      oDiv2.onclick = function () {
+        console.log("div2触发了！");
+      }
+    }
+  </script>
+  <style>
+    #div1 {
+      width: 200px;
+      height: 200px;
+      background: pink;
+      position: absolute;
+    }
+
+    #div2 {
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="div1">
+    <div id="div2"></div>
+  </div>
+</body>
+
+</html>

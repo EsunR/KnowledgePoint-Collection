@@ -1,8 +1,3 @@
-# AD:
-[想要看看外面的世界？想要翻墙价格便宜稳定高速？戳我！](http://cp.dawangidc.com/aff.php?aff=753)（← 请先找个梯子）
-
-年付普通1080P套餐仅60元/年，低至5元/月。年付尊享4K套餐仅80/年，低至6.6元/月。
-
 # 目录：
 
 ## 例题讲解 Example
@@ -36,8 +31,6 @@
 
 - [CSS3动画](./Note/KnowledgePoint/CSS动画.md)
 
-- [HTTP状态码](./Note/KnowledgePoint/HTTP状态码.md)
-
 - [网络安全](./Note/KnowledgePoint/网络安全.md)
 
 - [SVG](./Note/KnowledgePoint/SVG.md)
@@ -47,6 +40,20 @@
 - [变量类型和计算](./Note/KnowledgePoint/变量类型和计算.md)
 
 - [原型和原型链](./Note/KnowledgePoint/原型和原型链.md)
+
+- [日期和Math](./Note/KnowledgePoint/日期和Math.md)
+
+- [DOM](./Note/KnowledgePoint/DOM.md)
+
+- [BOM](./Note/KnowledgePoint/BOM.md)
+
+- [事件](./Note/KnowledgePoint/事件.md)
+
+- [Ajax](./Note/KnowledgePoint/Ajax.md)
+
+- [模块化开发](./Note/KnowledgePoint/模块化开发.md)
+
+- [发布订阅模式与观察者模式](./Note/KnowledgePoint/发布订阅模式与观察者模式.md)
 
 ## 知识点集合（持续更新中） - [链接](./Note/知识点集合.md)
 
