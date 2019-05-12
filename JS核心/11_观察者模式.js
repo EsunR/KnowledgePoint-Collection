@@ -60,6 +60,7 @@ DataHub.prototype.notify = function(url) {
   }
 };
 
+// 先设置观察者再对被观察对象进行操作
 
 // 创建一个数据中心
 var dataHub = new DataHub();
