@@ -8,7 +8,7 @@
 ## 1. navigator 浏览器
 
 获取用户设备信息：
-```js
+```javascript
 var ua = navigator.userAgent 
 var isChrome = ua.indexOf('Chrome')
 console.log(isChrome)
@@ -17,7 +17,7 @@ console.log(isChrome)
 ## 2. screen 屏幕
 
 获取屏幕信息：
-```js
+```javascript
 //screen 
 console.log(screen. width)
 console.log(screen. height)
@@ -25,7 +25,7 @@ console.log(screen. height)
 
 ## 3. location 地址栏
 
-```js
+```javascript
 //location 
 console.log(location.href) // 完整链接
 console.log(location.protocol) // 协议 'http:' 'https:'
@@ -38,7 +38,7 @@ console.log(location.hash) // #后的哈希值
 ## 4. history 历史
 
 控制前进后退：
-```js
+```javascript
 //history 
 history.back()
 history.forward()
@@ -48,7 +48,7 @@ history.forward()
 
 ## 1. 如何检测浏览器的类型
 
-```js
+```javascript
 var ua = navigator.userAgent 
 var isChrome = ua.indexOf('Chrome')
 console.log(isChrome)

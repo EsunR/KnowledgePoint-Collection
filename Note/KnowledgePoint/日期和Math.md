@@ -17,7 +17,7 @@
 # 知识点
 
 ## 1. 日期
-```js
+```javascript
 Date.now(); //获取当前时间毫秒数
 var dt=new Date(); 
 dt.getTime(); //获取毫秒数
@@ -31,7 +31,7 @@ dt.getSeconds(); //秒(0-59)
 
 ## 2. Math
 获取随机数
-```js
+```javascript
 Math.random();
 ```
 

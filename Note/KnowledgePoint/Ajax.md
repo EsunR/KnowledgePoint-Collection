@@ -16,7 +16,7 @@
 
 `xhr.send()` 发送的数据，如果仅仅发送一个请求而不传送数据则传入参数为 null
 
-```js
+```javascript
 var xhr = new XMLHttpRequest();
 xhr.open("GET", "/api", false);
 xhr.onreadystatechange = function(){

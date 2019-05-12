@@ -56,18 +56,18 @@ Canvas 和Flash的思路完全不一样，Flash是上屏幕之后还是对象，
 ```
 
 获取到画布后，使用画布对象上的 `.getContext()` 方法新建一个画布
-```js
+```javascript
 // 设置上下文，就相当于打开ps之后让你新建画布
 var ctx = myCanvas.getContext('2d');
 ```
 
 之后就可以对画布进行详细的样式操作（要在绘制动作前设置样式），如设置背景颜色：
-```js
+```javascript
 ctx.fillStyle = "pink"
 ```
 
 设置完样式之后就可以进行绘制操作，如绘制成一个矩形（Rect）
-```js
+```javascript
 ctx.fillRect(100, 100, 300, 200)
 // fillRect方法中的参数为设置绘制点的坐标，单位为px
 ```
@@ -96,7 +96,7 @@ fillStyle 设置填充颜色；
 
 如下可以绘制出一条折线：
 
-```js
+```javascript
 ctx.beginPath();
 ctx.moveTo(100, 100);
 ctx.lineTo(300, 300);
@@ -107,7 +107,7 @@ ctx.stroke();
 
 使用 `closePath()` 可以将最后一个绘制点【该绘制点是被用`moveTo(x, y)`打断绘制前的那个点】与第一个绘制点连接：
 
-```js
+```javascript
   ctx.beginPath();
   ctx.moveTo(100, 100);
   ctx.lineTo(300, 300);
@@ -118,7 +118,7 @@ ctx.stroke();
 ![](https://ws1.sinaimg.cn/large/a71efaafly1g2lpe43stnj20eq07jjr9.jpg)
 
 连续使用 `moveTo()` 可以让开始新的绘制点：
-```js
+```javascript
 ctx.beginPath();
 ctx.moveTo(100, 100);
 ctx.lineTo(300, 300);
@@ -135,7 +135,7 @@ ctx.stroke();
 
 在绘制前可以对绘制的线段进行样式设置：
 
-```js
+```javascript
 ctx.lineWidth = "10";
 ctx.strokeStyle = "red";
 ... ...
@@ -147,7 +147,7 @@ ctx.stock();
 
 在绘制之后，使用 `fill()` 可以填充封闭图像（如果没有封闭也会自动封闭）的颜色，设置 `fillStyle` 属性可以来设置填充颜色：
 
-```js
+```javascript
 ... ...
 ctx.stock();
 ctx.fillStyle = "skyblue"
@@ -161,7 +161,7 @@ ctx.fill();
 ## 6. 快速绘制
 
 `strokeReact(x, y, w, h)`快速绘制一个矩形
-```js
+```javascript
 ctx.fillStyle = "lightseagreen"
 ctx.strokeReact(100, 100, 300, 200);
 ```
@@ -169,7 +169,7 @@ ctx.strokeReact(100, 100, 300, 200);
 
 filRecto是一个快捷方法，让你省略了beginPath、move To、lineTo。所以fillRect（100，100，300，200）等价于：
 
-```js
+```javascript
 ctx.move(100，100);
 ctx.lineTo(400，100);
 ctx.lineTo(400，300);
@@ -180,7 +180,7 @@ ctx.fill();
 
 ## 6. 绘制复杂图像
 
-```js
+```javascript
 for (var i = 0; i <= 500; i += 10) {
   ctx.beginPath();
   ctx.moveTo(i, i);
@@ -228,7 +228,7 @@ fillStyle 设置填充色的样式
 ## 1. 绘制弧线
 使用 `arc(x, y, r, startRad, endRad, bollen)` 绘制弧线，arc属于笔触，需要使用`beginPath()`和`stroke()`来设置开始与绘制动作。
 
-```js
+```javascript
 ctx.beginPath();
 ctx.arc(200, 200, 100, 0, 1, true);
 ctx.stroke();
@@ -285,7 +285,7 @@ arc(x, y, r, startRad, endRad, bollen)
 使用 `createLinearrGradient(x1, y1, x2, y2)` 创建一个渐变对象，用 `addColorStop(rate, color)` 添加渐变颜色，将画布的 `fillStyle` 属性设置为这个渐变对象，即可以填充渐变颜色。
 
 如绘制一个矩形，矩形内的填充色为从`blue`渐变到`red`
-```js
+```javascript
 var lingrad = ctx.createLinearGradient(100, 100, 400, 400);
 lingrad.addColorStop(0, 'red');
 lingrad.addColorStop(1, 'blue');
@@ -316,13 +316,13 @@ addColorStop(rate, color)
 
 ## 1. 添加文字
 使用 `fillText(content, x, y)` 来设置文字，注意(x, y)为文字基线的位置
-```js
+```javascript
 ctx.fillText("你好", 100, 100);
 ```
 
 ## 2. 调整样式
 通过 `font` 属性来设置字体、字号
-```js
+```javascript
 ctx.font = "宋体"
 ```
 `font` 的级联样式 `ctx.font = "font-size font-family"`
@@ -336,7 +336,7 @@ ctx.font = "宋体"
 # 使用图片
 ## 1. 添加图片
 添加一个图片首先要创建一个`img`的实例，设置实例的`src`，监听这个实例的load事件，当图片加载完成后，利用 `drawImage(img, x, y)` 绘制出图片，如下实例：
-```js
+```javascript
 var img = new Image();
 img.src = "images/0.jpg";
 img.onload = function(){
@@ -363,13 +363,13 @@ canvas中元素不能运动，因为上屏幕之后就再也得不到它了，�
 清屏 → 更新 → 渲染 → 清屏 → 更新 → 渲染 → ...
 
 清屏：
-```js
+```javascript
 ctx.clearRect(0, 0, 800, 600)
 ```
 
 ## 2. 面向对象制变成作运动函数
 
-```js
+```javascript
 function Circle(x, y, r, color) {
   this.x = x;
   this.y = y;
@@ -399,7 +399,7 @@ setInterval(function () {
 
 ## 3. 使用ES6来详细来面向对象编程编写动画函数
 
-```js
+```javascript
 // 接口
 class Actor {
   constructor() {
