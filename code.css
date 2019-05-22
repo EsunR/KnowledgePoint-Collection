@@ -29,10 +29,6 @@ blockquote p{
 #main .wp-block-image img{
 	width:100%;
 }
-/* 文章段落两端对齐 */
-#main p{
-/* 	text-align: justify; */
-}
 /* 文章引用 */
 .wp-block-quote:before{
 	display: none;

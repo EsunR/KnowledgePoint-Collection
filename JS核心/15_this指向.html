@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    var name = '寒雨', age = 20;
+    function hello() {
+      window.console.log(this.name, ':', this.age);
+    }
+    hello();
+
+    hello.bind({ name: '2', age: '30' })();
+
+    let obj = {
+      sayHello: function () {
+        window.console.log(this);
+      },
+      sayHi: () => {
+        window.console.log(this); // 箭头函数中的this是指其定义时的环境
+      }
+    };
+
+    obj.sayHello();
+    obj.sayHi();
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
