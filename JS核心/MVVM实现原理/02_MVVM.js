@@ -14,6 +14,7 @@ function Mvvm(options = {}) {
       }
     })
   }
+  initComputed.call(this);
   new Compile(options.el, this);
 }
 // vm.$options
@@ -70,6 +71,25 @@ function Compile(el, vm) {
     Array.from(fragment.childNodes).forEach(function (node) {
       let text = node.textContent;
       let reg = /\{\{(.*)\}\}/;
+      // 如果是元素节点，读取其属性查看有没有 v-model
+      if (node.nodeType === 1) {
+        let nodeAttrs = node.attributes;
+        Array.from(nodeAttrs).forEach(function (attr) {
+          let name = attr.name;
+          let exp = attr.value;
+          if (name.indexOf('v-') === 0) {
+            // 默认以 "v-" 开头的为 "v-model"
+            node.value = vm[exp];
+          }
+          new Watcher(vm, exp, function (newVal) {
+            node.value = newVal; // 当watcher触发时，会自动将内容添到输入框内
+          })
+          node.addEventListener('input', function (e) {
+            let newVal = e.target.value;
+            vm[exp] = newVal;
+          })
+        })
+      }
       // 如果当前的节点类型是3（文本节点），就对其进行匹配处理
       if (node.nodeType === 3 && reg.test(text)) {
         // RegExp.$1为匹配的内容（即{{}}包裹的内容）
@@ -131,4 +151,16 @@ Watcher.prototype.update = function () {
     val = val[k];
   })
   this.fn(val);
+}
+
+
+// 初始化计算属性
+function initComputed() { // 具有缓存功能
+  let vm = this;
+  let computed = this.$options.computed;
+  Object.keys(computed).forEach(function (key) {
+    Object.defineProperty(vm, key, { // computed[key]
+      get: computed[key]
+    })
+  })
 }

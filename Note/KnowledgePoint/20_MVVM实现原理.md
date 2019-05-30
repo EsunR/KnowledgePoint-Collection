@@ -483,7 +483,56 @@ Watcher.prototype.update = function () {
 }
 ```
 
+# 7. 数据的双向绑定
 
+为了实现数据的双向绑定，要点在编译模板时，去审查每个Document节点元素身上有没有挂载 `v-model` 属性，如果有，就获取其 `value`，为其添加一个订阅，来当数据更新时连带更新输入框的内容，同时添加一个监听方法，当在其内部输入时，触发绑定数据的 `set()` 方法来变更数据的值：
+
+```js
+function Compile(el, vm) {
+  ... ...
+  function replace(fragment) {
+    Array.from(fragment.childNodes).forEach(function (node) {
+      ... ...
+      if (node.nodeType === 1) {
+        let nodeAttrs = node.attributes;
+        Array.from(nodeAttrs).forEach(function (attr) {
+          let name = attr.name;
+          let exp = attr.value;
+          // 默认以 "v-" 开头的为 "v-model"
+          if (name.indexOf('v-') === 0) {
+            node.value = vm[exp];
+          }
+          new Watcher(vm, exp, function (newVal) {
+            node.value = newVal;
+          })
+          node.addEventListener('input', function (e) {
+            let newVal = e.target.value;
+            vm[exp] = newVal;
+          })
+        })
+      }
+      ... ...
+    })
+  }
+}
+```
+
+# 8. 计算属性
+
+在Vue中，计算属性可以被缓存到vm实例上：
+
+```js
+function initComputed() { // 具有缓存功能
+  let vm = this;
+  let computed = this.$options.computed;
+  // Object.keys()方法可以将一个对象的key存放在一个数组数组中
+  Object.keys(computed).forEach(function (key) {
+    Object.defineProperty(vm, key, {
+      get: computed[key]
+    })
+  })
+}
+```
 
 
 

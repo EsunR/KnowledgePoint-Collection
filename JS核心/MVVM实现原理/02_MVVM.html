@@ -13,6 +13,8 @@
   <div id="app">
     <p>a的值{{a.a}}</p>
     <div>b的值{{b}}</div>
+    <input type="text" v-model="b">
+    <div>{{hello}}</div>
   </div>
   <script>
     let vm = new Mvvm({
@@ -20,6 +22,11 @@
       data: {
         a: { a: '是a' },
         b: '是b'
+      },
+      computed: {
+        hello() {
+          return this.a.a + this.b;
+        }
       }
     })  
   </script>
