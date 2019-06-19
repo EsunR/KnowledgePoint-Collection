@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>1px物理像素的实现</title>
+  <style>
+    #line-1 {
+      width: 100%;
+      height: 10px;
+      background-color: #000000;
+    }
+
+    #line-2 {
+      width: 100%;
+      height: 10px;
+      background-color: #000000;
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 2) {
+      #line-2 {
+        transform: scaleY(0.5);
+      }
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 3) {
+      #line-2 {
+        transform: scaleY(0.3333);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  高度为10px(实际像素)：
+  <div id="line-1"></div>
+
+  <br />
+
+  高度为10px(物理像素)：
+  <div id="line-2"></div>
+</body>
+
+</html>

@@ -117,9 +117,13 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
 
 # 1px物理像素的实现
 
-思路：这道题的目的在于，让显示器设备和移动设备都享有同样的CSS像素，即有相同的物理像素，让手机端按1个真实的物理像素点去显示页面上的1px。我们可以通过获取设备的像素比，加上利用meta标签的缩放设置，将页面缩放设置为 `1/像素比`。
+思路：
 
-**方案一：**
+这道题的应用场景在于，当我们拿到设计师的图纸时，图纸上的单位往往是像素级单位，但是由于存在像素比，所以当我们将一个元素按照设计图纸上的像素单位去填写时，会导致元素被缩放，我们需要考虑如何使其不缩放。
+
+这道题的目的在于，让显示器设备和移动设备都享有同样的CSS像素，即有相同的物理像素，让手机端按1个真实的物理像素点去显示页面上的1px。我们可以通过获取设备的像素比，加上利用meta标签的缩放设置，将页面缩放设置为 `1/像素比`。
+
+**方案一：使用缩放比，将整体页面缩放为1/dpr**
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -130,10 +134,15 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>1px物理像素的实现</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
     .box {
-      width: 0.5rem;
-      height: 0.5rem;
-      border-bottom: 10px solid #000000;
+      width: 320px;
+      height: 568px;
+      background-color: #000000;
     }
   </style>
 </head>
@@ -152,9 +161,6 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
       // 获取meta标签
       var metaNode = document.querySelector("meta[name='viewport']");
       metaNode.setAttribute('content', 'width=device-width, initial-scale=' + scale)
-
-      var htmlNode = document.querySelector('html');
-      htmlNode.style.fontSize = width * dpr + 'px';
     }
   </script>
 
@@ -165,7 +171,7 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
 ```
 
 
-**方案二：**
+**方案二：使用transform和媒体查询器对单个元素进行缩放**
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -176,31 +182,26 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>1px物理像素的实现</title>
   <style>
-    #box {
-      width: 200px;
-      height: 200px;
-      background-color: pink;
-      position: relative;
-    }
-
-    #box::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
+    #line-1 {
       width: 100%;
       height: 10px;
-      background: #000000;
+      background-color: #000000;
     }
 
-    @media screen and (-webkit-min-device-pixel-ratio: 2){
-      #box::before{
+    #line-2 {
+      width: 100%;
+      height: 10px;
+      background-color: #000000;
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 2) {
+      #line-2 {
         transform: scaleY(0.5);
       }
     }
 
-    @media screen and (-webkit-min-device-pixel-ratio: 3){
-      #box::before{
+    @media screen and (-webkit-min-device-pixel-ratio: 3) {
+      #line-2 {
         transform: scaleY(0.3333);
       }
     }
@@ -208,10 +209,13 @@ iPhoneSE的缩放比为2，那么我们将它的物理像素统统除以2，得�
 </head>
 
 <body>
-  <script>
-    console.log(window.devicePixelRatio);
-  </script>
-  <div id="box"></div>
+  高度为10px(实际像素)：
+  <div id="line-1"></div>
+
+  <br />
+
+  高度为10px(物理像素)：
+  <div id="line-2"></div>
 </body>
 
 </html>

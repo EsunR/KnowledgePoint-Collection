@@ -24,7 +24,7 @@ Object.defineProperty(obj, prop, descriptor)
 
 示例：
 
-```js
+```javascript
 var obj = { age: 18 }
 Object.defineProperty(obj, 'name', {
   value: 'esunr'
@@ -95,7 +95,7 @@ Object.defineProperty(obj, 'name', {
 
 示例：
 
-```js
+```javascript
 let obj = {};
 Object.defineProperty(obj, 'name', {
   configurable: true,
@@ -119,7 +119,7 @@ Object.defineProperty(obj, 'name', {
 
 示例：
 
-```js
+```javascript
 let obj = {};
 Object.defineProperty(obj, 'name', {
   configurable: true,
@@ -138,7 +138,7 @@ Object.defineProperty(obj, 'name', {
 
 在使用vue时，我们通常将这样定义一个vm实例：
 
-```js
+```javascript
 let vm = new Vue({
   el: 'app',
   data: { a: 2 }
@@ -156,7 +156,7 @@ let vm = new Vue({
 
 我们来实现Mvvm对象：
 
-```js
+```javascript
 function Mvvm(option = {}) {
   this.$options = option; // 将所有属性挂载了$options上
   var data = this._data = this.$options.data;
@@ -196,7 +196,7 @@ function observe(data) {
 
 实例化一个vm对象：
 
-```js
+```javascript
 let vm = new Vue({
   el: 'app',
   data: { a: {a: 1} }
@@ -213,7 +213,7 @@ let vm = new Vue({
 
 我们新增原有的核心代码：
 
-```js
+```javascript
 function Mvvm(option = {}) {
   this.$options = option;
   var data = this._data = this.$options.data;
@@ -246,7 +246,7 @@ function Mvvm(option = {}) {
 
 新增一个Compile对象来执行编译，其包含两个参数，一个el为MVVM模式下的文档范围，vm为MVVM实例：
 
-```js
+```javascript
 function Compile(el, vm) {
   // el 表示替换的范围
   vm.$el = document.querySelector(el);
@@ -289,7 +289,7 @@ function Compile(el, vm) {
 
 在核心代码中启用：
 
-```js
+```javascript
 function Mvvm(options = {}) {
   ... ...
   new Compile(options.el, this);
@@ -324,7 +324,7 @@ function Mvvm(options = {}) {
 
 发布订阅模式的构造如下：
 
-```js
+```javascript
 // 1. 构造发布者
 function Dep() {
   this.subArr = [];
@@ -472,7 +472,7 @@ Vue数据更新机制的订阅者是 `Compile` 编译器，当数据发生了变
 
 但是正如最初我们提到的，执行订阅者的 `update()` 方法去执行传入订阅者内部的函数时，需要获取新值 `newVal`，那么我们需要去更改一下 `update()` 方法，由于其执行前已经对数据进行了重新赋值，所以只要查找该订阅者对应的值就可以获取 `newVal` 了。
 
-```js
+```javascript
 Watcher.prototype.update = function () {
   let val = this.vm;
   let arr = this.exp.split('.');
@@ -487,7 +487,7 @@ Watcher.prototype.update = function () {
 
 为了实现数据的双向绑定，要点在编译模板时，去审查每个Document节点元素身上有没有挂载 `v-model` 属性，如果有，就获取其 `value`，为其添加一个订阅，来当数据更新时连带更新输入框的内容，同时添加一个监听方法，当在其内部输入时，触发绑定数据的 `set()` 方法来变更数据的值：
 
-```js
+```javascript
 function Compile(el, vm) {
   ... ...
   function replace(fragment) {
@@ -521,7 +521,7 @@ function Compile(el, vm) {
 
 在Vue中，计算属性可以被缓存到vm实例上：
 
-```js
+```javascript
 function initComputed() { // 具有缓存功能
   let vm = this;
   let computed = this.$options.computed;

@@ -7,10 +7,15 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>1px物理像素的实现</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
     .box {
-      width: 200px;
-      height: 200px;
-      background-color: pink;
+      width: 100px;
+      height: 1px;
+      background-color: #000000;
     }
   </style>
 </head>
@@ -29,10 +34,6 @@
       // 获取meta标签
       var metaNode = document.querySelector("meta[name='viewport']");
       metaNode.setAttribute('content', 'width=device-width, initial-scale=' + scale)
-
-      // 页面中的元素，高度、宽度比利需要反向程回来
-      var htmlNode = document.querySelector('html');
-      htmlNode.style.fontSize = width * dpr + 'px';
     }
   </script>
 
