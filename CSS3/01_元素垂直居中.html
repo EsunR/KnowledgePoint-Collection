@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+    }
+
+    .container {
+      width: 33.33%;
+      height: 300px;
+      background-color: skyblue;
+      margin: 20px;
+      position: relative;
+    }
+
+    .inner {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+    }
+
+
+    /* 方案1：利用定位 */
+    .inner1 {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
+    /* 方案2：利用felx */
+    .container2 {
+      display: flex;
+      align-items: center;
+    }
+
+    /* 方案3: 利用transition */
+    .inner3 {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container1 container">
+    <div class="inner1 inner"></div>
+  </div>
+
+  <div class="container2 container">
+    <div class="inner2 inner"></div>
+  </div>
+
+  <div class="container3 container">
+    <div class="inner3 inner"></div>
+  </div>
+</body>
+
+</html>
