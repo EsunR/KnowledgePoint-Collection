@@ -1,0 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+  background-color: pink;
+  margin: 20px
+}

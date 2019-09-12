@@ -56,7 +56,9 @@
 
 - [发布订阅模式与观察者模式](./Note/KnowledgePoint/19_发布订阅模式与观察者模式.md)
 
-- [MVVM实现原理](./Note/KnowledgePoint/20_MVVM实现原理.md)
+- [Vue中的MVVM实现原理](./Note/KnowledgePoint/20_MVVM实现原理.md)
+
+- [页面优化的方案](./Note/KnowledgePoint/页面优化的方案.md)
 
 ## 知识点集合（持续更新中） - [链接](./Note/知识点集合.md)
 
