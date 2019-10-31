@@ -1,0 +1,54 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+.container {
+  width: 100%;
+  max-width: 1000px;
+  min-height: 100%;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  height: 200px;
+  background-color: skyblue;
+}
+.content {
+  display: flex;
+  min-height: 500px;
+}
+.left {
+  width: 70%;
+}
+.left-content {
+  border: 1px solid rgba(0, 0, 0, 1);
+  box-sizing: border-box;
+  padding-top: 400px;
+  transition: padding 1s ease;
+}
+.right {
+  width: 30%;
+}
+.right-content {
+  border: 1px solid rgba(0, 0, 0, 1);
+  box-sizing: border-box;
+  transition: padding 1s ease;
+}
+.inner {
+  background-color: pink;
+  height: 500px;
+}
+
+.animate .left-content {
+  padding-top: 0;
+}
+.animate .right-content {
+  padding-top: 200px;
+}
+
+.footer {
+  height: 1000px;
+  background-color: papayawhip;
+}
